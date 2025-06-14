@@ -1,8 +1,9 @@
-from flask import Flask
+from flask import Flask, request
 import requests
 
 from cognitive_support import get_activity_message
 from therapy_and_recreation import create_puzzle
+from accessibility_and_medical import translate_text_live
 
 app = Flask(__name__)
 
@@ -39,12 +40,40 @@ def waid():
     return {'message': message}, 200
 
 
+
+
+
+
 @app.route('/therapy-and-recreation/puzzle-coach')
 def puzzle_therapy():
     
     game = create_puzzle()
 
     return game, 200
+
+
+
+
+
+
+@app.route('/accessibility-and-medical/live-translation-assistant', methods=['POST'])
+def translate_live():
+
+    query = request.json['query']
+    src = request.json['src']
+    dest = request.json['dest']
+
+    try:
+
+        translation = translate_text_live(query,src,dest)
+
+        return translation, 200
+
+    except Exception as error:
+
+        return {
+            'error' : str(error)
+        }, 400
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
