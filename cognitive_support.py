@@ -1,4 +1,5 @@
 from datetime import datetime
+from random import randint
 
 def get_activity_message() -> str:
     
@@ -26,3 +27,35 @@ def get_activity_message() -> str:
             return f"You should {activity.lower()} at this hour."
 
     return "No activity scheduled for this time."
+
+
+
+def generate_questions(count : int) -> list:
+
+    questions = [
+        "How are you feeling emotionally today (happy, anxious, sad, calm)?",
+        "Did anything upset or stress you today?",
+        "Is there something you’re looking forward to today or tomorrow?",
+        "Have you been feeling lonely or disconnected lately?",
+        "Would you like to talk to someone today?",
+        "How is your energy level this morning?",
+        "Did you sleep well last night?",
+        "Are you experiencing any pain or discomfort today?",
+        "Have you eaten any meals or snacks in the last few hours?",
+        "Are you feeling dizzy, weak, or unwell in any way?",
+        "Did you take your medications as prescribed today?",
+        "Do you need a reminder or help with any appointments?",
+        "Have you had enough water today?",
+        "Is there anything you forgot or feel unsure about doing today?"
+    ]
+
+
+    random_questions_start = randint(0,len(questions)-count-1)
+
+    return {
+        "questions" : 
+            questions[random_questions_start:random_questions_start+count]
+        
+    }
+
+
