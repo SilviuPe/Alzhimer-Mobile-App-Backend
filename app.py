@@ -113,5 +113,34 @@ def translate_live():
             'error' : str(error)
         }, 400
 
+
+
+@app.route('/accessibility-and-medical/speech-notes', methods=['POST', 'GET'])
+def get_or_register_notes():
+
+    if request.method == 'POST':
+
+        note = request.json['note']
+
+        with open('notes.txt', 'a') as file:
+
+            file.write(f'{note}\n')
+            file.close()
+
+        return {}, 200
+
+    if request.method == 'GET':
+        with open('notes.txt', 'r') as file:
+                
+            notes = []
+            for line in file.readlines():
+                notes.append(line)
+
+            return {
+                'notes' : notes
+            } , 200
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5001, debug=True)

@@ -76,10 +76,10 @@ def reminders():
             print(current_hour_index_in_list-1)
 
             previous_hour_index = current_hour_index_in_list-1
-            previous_hour = list(schedule[period].keys())[previous_hour_index]
+            previous_hour = orders[previous_hour_index]
             
             next_hour_index = current_hour_index_in_list+1
-            next_hour = list(schedule[period].keys())[next_hour_index]
+            next_hour = orders[next_hour_index]
 
             activities.update({
                 'previous': f'{previous_hour} {period} - {schedule[period][previous_hour]}',
