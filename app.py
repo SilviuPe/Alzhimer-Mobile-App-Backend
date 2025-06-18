@@ -7,7 +7,7 @@ from therapy_and_recreation import create_puzzle
 from accessibility_and_medical import translate_text_live
 from safety_and_communication import reminders
 
-from home import get_random_images
+from home import get_random_images, load_contacts
 
 app = Flask(__name__)
 CORS(app)
@@ -85,12 +85,25 @@ def get_images_url():
     return {
         'images' : {
             'image_1' : images_list[0],
-            'image_2' : images_list[1]
+            'image_2' : images_list[1],
+            'image_3' : images_list[2]
         },
-        'date' : images_list[2]
+        'date' : images_list[3]
     }, 200
 
 
+@app.route('/home/contacts')
+def get_contacts_images_url():
+
+    images_list = load_contacts()
+
+    return {
+        'images' : {
+            'image_1' : images_list[0],
+            'image_2' : images_list[1],
+            'image_3' : images_list[2]
+        },
+    }, 200
 
 
 
